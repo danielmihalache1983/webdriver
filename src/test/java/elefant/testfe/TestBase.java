@@ -16,9 +16,6 @@ public class TestBase extends AbstractTestNGSpringContextTests {
 	@Autowired
 	WebDriverFactory factory;
 
-	@Value("${webdriver.gecko.driver}")
-	String geckoDriver;
-	
 	@Value("${site.url}")
 	String siteUrl;
 
@@ -26,12 +23,10 @@ public class TestBase extends AbstractTestNGSpringContextTests {
 
 	@BeforeClass(alwaysRun = true)
 	public void init() {
-		System.setProperty("webdriver.gecko.driver", geckoDriver);
-
 		driver = factory.getInstance();
 		driver.get(siteUrl);
 	}
-	
+
 	@AfterClass
 	public void tearDown() {
 		if (driver != null) {

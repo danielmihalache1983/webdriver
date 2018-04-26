@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 public class WebDriverFactory {
 
 	public WebDriver getInstance() {
+		setFirefoxDriver();
 		return new FirefoxDriver();
 	}
 
+	private static void setFirefoxDriver() {
+		String os = System.getProperty("os.name").toLowerCase().substring(0, 3);
+		String firefoxBinary = "src/main/resources/geckodriver" + (os.equals("win") ? ".exe" : "");
+		System.setProperty("webdriver.gecko.driver", firefoxBinary);
+	}
 }
